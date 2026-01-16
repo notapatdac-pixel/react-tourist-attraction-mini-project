@@ -22,6 +22,13 @@ app.get("/trips", (req, res) => {
     });
   }
 
+  // If keywords is empty string, return all trips
+  if (keywords === '' || keywords.trim() === '') {
+    return res.json({
+      data: trips,
+    });
+  }
+
   const regexKeywords = keywords.split(" ").join("|");
   const regex = new RegExp(regexKeywords, "ig");
   const results = trips.filter((trip) => {
